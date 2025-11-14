@@ -21,7 +21,6 @@ package com.deathmotion.totemguard.events.bukkit;
 import com.deathmotion.totemguard.TotemGuard;
 import com.deathmotion.totemguard.models.TotemPlayer;
 import com.deathmotion.totemguard.models.impl.DigAndPickupState;
-import io.papermc.paper.event.packet.PlayerChunkLoadEvent;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -31,6 +30,7 @@ import org.bukkit.event.entity.EntityResurrectEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.inventory.ItemStack;
@@ -38,7 +38,7 @@ import org.bukkit.inventory.ItemStack;
 public class CheckManagerBukkitListener implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-    public void onPlayerChunkLoad(final PlayerChunkLoadEvent event) {
+    public void onPlayerMove(final PlayerMoveEvent event) {
         Player player = event.getPlayer();
 
         TotemPlayer totemPlayer = TotemGuard.getInstance().getPlayerDataManager().getPlayer(player);

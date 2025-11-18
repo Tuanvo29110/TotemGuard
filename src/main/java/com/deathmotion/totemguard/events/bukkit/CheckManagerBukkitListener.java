@@ -22,6 +22,7 @@ import com.deathmotion.totemguard.TotemGuard;
 import com.deathmotion.totemguard.models.TotemPlayer;
 import com.deathmotion.totemguard.models.impl.DigAndPickupState;
 import org.bukkit.Material;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -39,11 +40,16 @@ public class CheckManagerBukkitListener implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onPlayerMove(final PlayerMoveEvent event) {
-        if (event.getFrom().getBlockX() == event.getTo().getBlockX() &&
-            event.getFrom().getBlockY() == event.getTo().getBlockY() &&
-            event.getFrom().getBlockZ() == event.getTo().getBlockZ()) {
+        Location from = event.getFrom();
+        Location to = event.getTo();
+
+        if (from.getBlockX() == to.getBlockX() &&
+            from.getBlockY() == to.getBlockY() &&
+            from.getBlockZ() == to.getBlockZ()) {
             return;
         }
+
+        if (from.distanceSquared(to) < 9) return;
         
         Player player = event.getPlayer();
 

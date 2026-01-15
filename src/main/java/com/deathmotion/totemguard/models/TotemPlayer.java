@@ -101,7 +101,7 @@ public class TotemPlayer implements TotemUser {
 
     private void scheduleCheck(Runnable task) {
         long ping = Math.max(0L, getPing());
-        long delay = (ping + 5L) * 5L;
+        long delay = Math.max(5000L, (ping + 5L) * 5L + (ping / 50L) * 1000L);
 
         FoliaScheduler.getAsyncScheduler().runDelayed(
                 TotemGuard.getInstance(),
